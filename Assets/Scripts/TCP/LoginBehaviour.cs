@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoginBehaviour : MonoBehaviour
 {
@@ -16,8 +17,11 @@ public class LoginBehaviour : MonoBehaviour
     }
 
     private void Clicked()
-    {       
-        //Llamo a la funcion del network manager para conectarme al servidor pasando nick y contraseña
-        Network_Manager._NETWORK_MANAGER.ConnectToServer(loginText.text.ToString(), passwordText.text.ToString());
+    {
+        if (loginText.text != "" && passwordText.text != "")
+        {
+            Network_Manager._NETWORK_MANAGER.LogIn(loginText.text, passwordText.text);
+            SceneManager.LoadScene("JoinCreate");
+        }
     }
 }

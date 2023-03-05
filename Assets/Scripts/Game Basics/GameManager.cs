@@ -2,20 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject spawnPlayer1;
+
+    [SerializeField]
+    private GameObject spawnPlayer2;
+
+    private void Awake()
     {
-        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if(spawnPlayer1 != null)
+            {
+                PhotonNetwork.Instantiate("Player", spawnPlayer1.transform.position, Quaternion.identity);
+            }
+            
+        }
+        else
+        {
+            if (spawnPlayer2 != null)
+            {
+                PhotonNetwork.Instantiate("Player", spawnPlayer2.transform.position, Quaternion.identity);
+            }
+                
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ToLogin()
     {
         SceneManager.LoadScene("LoginScreen");
@@ -25,4 +40,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("RegisterScreen");
     }
+
 }

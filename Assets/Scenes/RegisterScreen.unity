@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 199219599}
   - component: {fileID: 199219598}
   - component: {fileID: 199219597}
+  - component: {fileID: 199219601}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -679,6 +680,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &199219601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199219596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f5ae23fbb36174ea75c71c83f80235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerButton: {fileID: 1945836329}
+  nickRegisterText: {fileID: 733387860}
+  registerPasswordText: {fileID: 2108342900}
+  raceSelector: {fileID: 1748543237}
+  raceSelected: 
 --- !u!1 &301431327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1250,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: REPTILE
 --- !u!222 &734661778
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1925,15 +1943,27 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: REPTILE
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: MOUSE
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: FELINE
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 199219601}
+        m_TargetAssemblyTypeName: RegisterBehaviour, Assembly-CSharp
+        m_MethodName: RaceSelector
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1748543238
 MonoBehaviour:
@@ -2245,7 +2275,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1945836330}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 199219601}
+        m_TargetAssemblyTypeName: RegisterBehaviour, Assembly-CSharp
+        m_MethodName: OnRegisterButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1945836330
 MonoBehaviour:
   m_ObjectHideFlags: 0

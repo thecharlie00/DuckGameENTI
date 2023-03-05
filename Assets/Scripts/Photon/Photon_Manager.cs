@@ -7,7 +7,9 @@ using Photon.Realtime;
 public class Photon_Manager : MonoBehaviourPunCallbacks 
 {
     public static Photon_Manager _PHOTON_MANAGER;
-
+    public string nickEnemy;
+    public Race playerRace;
+    public Race enemyRace;
     private void Awake()
     {
         //Generamos singleton
@@ -70,7 +72,22 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     //Al unirme a la sala
     public override void OnJoinedRoom()
     {
-        Debug.Log("Me he unido a la sala: " + PhotonNetwork.CurrentRoom.Name + " con " + PhotonNetwork.CurrentRoom.PlayerCount + " jugadores conectados en ella.");
+        Debug.Log("Me he unido a la Sala" + PhotonNetwork.CurrentRoom.Name + "con"
+             + PhotonNetwork.CurrentRoom.PlayerCount + "Jugadores conectados a ellas");
+
+
+        Debug.Log("Has joined: " + Network_Manager._NETWORK_MANAGER.GetCurrentUser().GetNickName());
+
+        foreach (Player player in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            if (player.NickName != PhotonNetwork.NickName)
+            {
+                nickEnemy = player.NickName;
+
+                
+                Network_Manager._NETWORK_MANAGER.SendNickToGetRace(nickEnemy);
+            }
+        }
     }
 
     //Al no poderme conectar a una sala.
@@ -81,11 +98,27 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        //Si la sala esta llena y soy el maestro de sala inicio la carga del ingame para todos los jugadores (hemos asignado el syncloadscene anteriormente)
-        if(PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers && PhotonNetwork.IsMasterClient)
+       
+        
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
-            PhotonNetwork.LoadLevel("Ingame");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                nickEnemy = newPlayer.NickName;
+                Network_Manager._NETWORK_MANAGER.SendNickToGetRace(nickEnemy);
+                PhotonNetwork.LoadLevel("Gameplay");
+            }
         }
+    }
+
+    void LoadLevel()
+    {
+
+    }
+    public void LeaveCurrentRoom()
+    {
+        PhotonNetwork.LeaveRoom(true);
     }
 }
 
