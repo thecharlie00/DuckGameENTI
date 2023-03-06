@@ -19,16 +19,17 @@ public class Bullet : MonoBehaviourPun
         rb.velocity = new Vector2(speed, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        collision.gameObject.GetComponent<PlayerController>().Damage();
-        pv.RPC("NetworkDestroy", RpcTarget.All);
-
-    }
+    
     [PunRPC]
     void NetworkDestroy()
     {
         Destroy(this.gameObject);
+    }
+    [PunRPC]
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<PlayerController>().Damage();
+        pv.RPC("NetworkDestroy", RpcTarget.All);
     }
 
 }

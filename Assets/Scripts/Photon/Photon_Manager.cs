@@ -8,8 +8,6 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
 {
     public static Photon_Manager _PHOTON_MANAGER;
     public string nickEnemy;
-    public Race playerRace;
-    public Race enemyRace;
     private void Awake()
     {
         //Generamos singleton
@@ -54,7 +52,10 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("Accedido al Lobby");
-        PhotonNetwork.LoadLevel("LoginRegister");
+       
+            PhotonNetwork.LoadLevel("LoginRegister");
+        
+        
     }
 
     //Funcion para crear salas
@@ -85,7 +86,7 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
                 nickEnemy = player.NickName;
 
                 
-                Network_Manager._NETWORK_MANAGER.SendNickToGetRace(nickEnemy);
+               
             }
         }
     }
@@ -106,7 +107,6 @@ public class Photon_Manager : MonoBehaviourPunCallbacks
             if (PhotonNetwork.IsMasterClient)
             {
                 nickEnemy = newPlayer.NickName;
-                Network_Manager._NETWORK_MANAGER.SendNickToGetRace(nickEnemy);
                 PhotonNetwork.LoadLevel("Gameplay");
             }
         }

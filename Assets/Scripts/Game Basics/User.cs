@@ -6,18 +6,17 @@ public class User
 {
     public string nick;
     public int idInDatabase;
-    public int idRaceAssigned;
-    public Race races;
+   
+    
 
     public User()
     {
 
     }
-    public User(string username, int idDB, int idClass)
+    public User(string username, int idDB)
     {
         this.nick = username;
         this.idInDatabase = idDB;
-        this.idRaceAssigned = idClass;
     }
 
     public string GetNickName()
@@ -28,16 +27,5 @@ public class User
     {
         return idInDatabase;
     }
-    public void SetRace(Race _race)
-    {
-        this.races = _race;
-    }
-    public Race GetRace()
-    {
-        return races;
-    }
-    public int GetIdRaceAssigned()
-    {
-        return idRaceAssigned;
-    }
+    
 }
